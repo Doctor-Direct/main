@@ -61,10 +61,10 @@ body {
 
 /* Slideshow container */
 .slideshow-container {
-    max-width: 1000px;
+    max-width: auto;
     height: 400px;
     position: relative;
-    margin: auto;
+    margin: 10px;
     overflow: hidden; /* Ensures images do not exceed the frame */
   }
   
@@ -227,4 +227,81 @@ p {
 .btn:hover {
     background: #0056b3;
     transform: scale(1.05);
+}
+
+.appo{ 
+  align-items: center;}
+
+.container {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  width: 1000px;
+}
+
+
+.appointment-section {
+  margin-bottom: 25px;
+}
+
+.appointment-section button {
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.horizontal-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-end;
+  width: auto;
+}
+
+.form-group {
+  flex: 1;
+  min-width: 150px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 14px;
+}
+
+.form-group input, .form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Add margin between Doctor Name and Specialization */
+#doctor-name {
+  margin-right: 20px; /* Adjust the value as needed */
+}
+
+/* Add margin between Date and Submit button */
+#date {
+  margin-right: 20px; /* Adjust the value as needed */
+}
+
+button[type="submit"] {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  height: auto;
+  align-self: flex-end;
+  font-size: 16px;
 }
