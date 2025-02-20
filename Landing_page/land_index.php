@@ -12,7 +12,7 @@
     <nav class="navbar">
         <div class="logo">Doc Direct</div>
         <ul class="nav-links">
-            <li><a href="land_index.html">Home</a></li>
+            <li><a href="land_index.php">Home</a></li>
             <li><a href="land_log_index.html">Login</a></li>
             <li><a href="#">Hospital</a></li>
             <li><a href="#">About Us</a></li>
@@ -87,6 +87,10 @@
             <div class="form-group">
                 <label for="specialization">Specialization</label>
                 <select id="specialization">
+                    <?php 
+                        include ($_SERVER['DOCUMENT_ROOT'] . '/doc_direct_main/connection.php');
+
+                    ?>
                     <option value="">Select Specialization</option>
                     <!-- Add more options here -->
                 </select>
