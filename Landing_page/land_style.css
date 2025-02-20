@@ -173,12 +173,13 @@ body {
     text-align: center;
     padding: 50px 20px;
     height: 400px;
+    width: auto;
     display: flex;
 }
 
 .section {
     margin: 10px;
-    max-width: 1000px;
+    max-width: 50%;
     height: 400px;
     background: white;
     padding: 20px;
@@ -199,13 +200,13 @@ p {
     margin-top: 50px;
     text-align: center;
     padding: 50px 20px;
-    height: 400px;
+    height: auto;
 }
 
 .section_part{
     margin: 10px;
-    max-width: 1000px;
-    height: 400px;
+    max-width: aut0;
+    height: auto;
     background: white;
     padding: 20px;
     border-radius: 10px;
@@ -237,8 +238,8 @@ p {
   padding: 30px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
-  width: 1000px;
+  margin: 20px;
+  width: auto;
 }
 
 
