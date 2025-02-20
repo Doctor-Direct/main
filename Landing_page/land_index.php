@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Doc Direct</title>
+    <title>Home</title>
     <link rel="stylesheet" href="land_style.css">
     
 </head>
@@ -87,10 +87,6 @@
             <div class="form-group">
                 <label for="specialization">Specialization</label>
                 <select id="specialization">
-                    <?php 
-                        include ($_SERVER['DOCUMENT_ROOT'] . '/doc_direct_main/connection.php');
-
-                    ?>
                     <option value="">Select Specialization</option>
                     <!-- Add more options here -->
                 </select>
