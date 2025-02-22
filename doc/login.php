@@ -1,7 +1,6 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/doc_direct_main/connection.php');
-session_start();
-// Start session
+session_start(); // Start session
 
 // Check for form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -18,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // If no errors, process login
     if (empty($errors)) {
         $username = mysqli_real_escape_string($connection, $_POST['username']);
-        $password = mysqli_real_escape_string($connection, $_POST['password']);
+        $password = $_POST['password']; // No need to escape since not directly used in query
 
         // Query to check login credentials
         $query = "SELECT * FROM doctor WHERE username = '{$username}' LIMIT 1";
@@ -28,10 +27,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (mysqli_num_rows($result_set) == 1) {
                 $user = mysqli_fetch_assoc($result_set);
 
-                // If passwords are hashed, use password_verify()
-                if ($password === $user['password']) {  // **Use password_verify() if hashed**
+                // Use password_verify to compare hashed passwords
+                if (password_verify($password, $user['password'])) {
                     $_SESSION['username'] = $username; // Store username in session
-                    header('Location: /doc_direct_main/doc/test.html');
+
+                    // Show success popup and redirect after clicking OK
+                    echo "<script>
+                        alert('Login Successful!');
+                        window.location.href = 'login.php';
+                    </script>";
                     exit();
                 } else {
                     $errors[] = 'Invalid Username / Password';
