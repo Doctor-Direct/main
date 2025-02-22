@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = mysqli_real_escape_string($connection, trim($_POST['username']));
     $password = mysqli_real_escape_string($connection, trim($_POST['password']));
     $confirm_password = mysqli_real_escape_string($connection, trim($_POST['confirm_password']));
-    $category = mysqli_real_escape_string($connection, trim($_POST['category']));
+    $category_name = mysqli_real_escape_string($connection, trim($_POST['category_name']));
 
     // Basic validations
     if (empty($fullname) || empty($contact) || empty($email) || empty($address) || empty($username) || empty($password) || empty($confirm_password) || empty($category)) {
@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup</title>
     <link rel="shortcut icon" href="/doc_direct_main/pat/DOCTOR PAL.png" type="image/x-icon">
-    <link rel="stylesheet" href="signup.css">
+    <link rel="stylesheet" href="singup.css">
 </head>
 <body>
     <div class="container">
