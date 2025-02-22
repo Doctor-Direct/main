@@ -14,10 +14,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = mysqli_real_escape_string($connection, trim($_POST['username']));
     $password = mysqli_real_escape_string($connection, trim($_POST['password']));
     $confirm_password = mysqli_real_escape_string($connection, trim($_POST['confirm_password']));
-    $category_name = mysqli_real_escape_string($connection, trim($_POST['category']));
+    $category_name = mysqli_real_escape_string($connection, trim($_POST['category_name']));
 
     // Basic validations
-    if (empty($fullname) || empty($contact) || empty($email) || empty($address) || empty($username) || empty($password) || empty($confirm_password) || empty($category)) {
+    if (empty($fullname) || empty($contact) || empty($email) || empty($address) || empty($username) || empty($password) || empty($confirm_password) || empty($category_name)) {
         $errors[] = 'All fields are required.';
     }
 
@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($errors)) {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT); // Securely hash the password
 
-        $query = "INSERT INTO doctor (fullname, contact, email, address, username, password, category) VALUES ('$fullname', '$contact', '$email', '$address', '$username', '$hashed_password', '$category_name')";
+        $query = "INSERT INTO doctor (fullname, contact, email, address, username, password, category_name) VALUES ('$fullname', '$contact', '$email', '$address', '$username', '$hashed_password', '$category_name')";
 
         if (mysqli_query($connection, $query)) {
             echo "<script>alert('Registration Successful! Redirecting to login page.'); window.location.href='login.php';</script>";
@@ -95,7 +95,7 @@ if (!$category_result) {
                 </div>
                 <div class="input_wrapper">
                     <label for="category">Category</label>
-                    <select name="category" required>
+                    <select name="category_name" required>
                         <option value="">Select Category</option>
                         <?php
                         while ($row = mysqli_fetch_assoc($category_result)) {
