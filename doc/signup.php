@@ -1,69 +1,111 @@
+<?php
+require_once($_SERVER['DOCUMENT_ROOT'] . '/doc_direct_main/connection.php');
+session_start();
+
+// Check for form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $errors = array();
+
+    // Sanitize and validate input
+    $fullname = mysqli_real_escape_string($connection, trim($_POST['fullname']));
+    $contact = mysqli_real_escape_string($connection, trim($_POST['contact']));
+    $email = mysqli_real_escape_string($connection, trim($_POST['email']));
+    $address = mysqli_real_escape_string($connection, trim($_POST['address']));
+    $username = mysqli_real_escape_string($connection, trim($_POST['username']));
+    $password = mysqli_real_escape_string($connection, trim($_POST['password']));
+    $confirm_password = mysqli_real_escape_string($connection, trim($_POST['confirm_password']));
+    $category = mysqli_real_escape_string($connection, trim($_POST['category']));
+
+    // Basic validations
+    if (empty($fullname) || empty($contact) || empty($email) || empty($address) || empty($username) || empty($password) || empty($confirm_password) || empty($category)) {
+        $errors[] = 'All fields are required.';
+    }
+
+    if ($password !== $confirm_password) {
+        $errors[] = 'Passwords do not match.';
+    }
+
+    // If no errors, insert into database
+    if (empty($errors)) {
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT); // Securely hash the password
+
+        $query = "INSERT INTO doctor (fullname, contact, email, address, username, password, category) VALUES ('$fullname', '$contact', '$email', '$address', '$username', '$hashed_password', '$category')";
+
+        if (mysqli_query($connection, $query)) {
+            $_SESSION['username'] = $username;
+            header('Location: /doc_direct_main/doc/test.html');
+            exit();
+        } else {
+            $errors[] = 'Database Insertion Failed: ' . mysqli_error($connection);
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="/doc_direct/Main/docd/docd/web/pat/DOCTOR PAL.png" type="image/x-icon">
     <title>Signup</title>
-    <link rel="stylesheet" href="singup.css">
+    <link rel="shortcut icon" href="/doc_direct_main/pat/DOCTOR PAL.png" type="image/x-icon">
+    <link rel="stylesheet" href="signup.css">
 </head>
 <body>
     <div class="container">
-    <div class="login-signup-container">
-        <!-- Signup Form -->
-        <form id="signup-form" class="form">
-            <div class="form-title">Sign Up</div>
-            <div class="input_wrapper">
-                <input type="text" id="signup-fullname" class="input_field" required>
-                <label for="signup-fullname" class="label">Full Name</label>
-                <i class="fa-regular fa-user icon"></i>
-            </div>
-            <div class="input_wrapper">
-                <input type="text" id="signup-contact" class="input_field" required>
-                <label for="signup-contact" class="label">Contact Number</label>
-                <i class="fa-solid fa-phone icon"></i>
-            </div>
-            <div class="input_wrapper">
-                <input type="email" id="signup-email" class="input_field" required>
-                <label for="signup-email" class="label">Email</label>
-                <i class="fa-regular fa-envelope icon"></i>
-            </div>
-            <div class="input_wrapper">
-                <input type="text" id="signup-address" class="input_field" required>
-                <label for="signup-address" class="label">Home Address</label>
-                <i class="fa-solid fa-map-marker-alt icon"></i>
-            </div>
-            <div class="input_wrapper">
-                <input type="text" id="signup-username" class="input_field" required>
-                <label for="signup-username" class="label">Username</label>
-                <i class="fa-regular fa-user icon"></i>
-            </div>
-            <div class="input_wrapper">
-                <input type="password" id="signup-password" class="input_field" required>
-                <label for="signup-password" class="label">Password</label>
-                <i class="fa-solid fa-lock icon"></i>
-            </div>
-            <div class="input_wrapper">
-                <input type="password" id="signup-confirm-password" class="input_field" required>
-                <label for="signup-confirm-password" class="label">Confirm Password</label>
-                <i class="fa-solid fa-lock icon"></i>
-            </div>
-            <div class="input_wrapper" >
-                <label for="country">Category</label>
-                    <select id="country" name="country">
-                    <option value="usa"></option>
-                    <option value="canada">Canada</option>
-                    <option value="australia">Australia</option>
+        <div class="login-signup-container">
+            <form method="post" action="signup.php" id="signup-form">
+                <div class="form-title">Sign Up</div>
+                <?php if (!empty($errors)) {
+                    echo '<p class="Error">' . implode('<br>', $errors) . '</p>';
+                } ?>
+                <div class="input_wrapper">
+                    <input type="text" name="fullname" class="input_field" required>
+                    <label class="label">Full Name</label>
+                </div>
+                <div class="input_wrapper">
+                    <input type="text" name="contact" class="input_field" required>
+                    <label class="label">Contact Number</label>
+                </div>
+                <div class="input_wrapper">
+                    <input type="email" name="email" class="input_field" required>
+                    <label class="label">Email</label>
+                </div>
+                <div class="input_wrapper">
+                    <input type="text" name="address" class="input_field" required>
+                    <label class="label">Home Address</label>
+                </div>
+                <div class="input_wrapper">
+                    <input type="text" name="username" class="input_field" required>
+                    <label class="label">Username</label>
+                </div>
+                <div class="input_wrapper">
+                    <input type="password" name="password" class="input_field" required>
+                    <label class="label">Password</label>
+                </div>
+                <div class="input_wrapper">
+                    <input type="password" name="confirm_password" class="input_field" required>
+                    <label class="label">Confirm Password</label>
+                </div>
+                <div class="input_wrapper">
+                    <label for="category">Category</label>
+                    <select name="category" required>
+                        <option value=""></option>
+                        <option value="General Practitioner">General Practitioner</option>
+                        <option value="Specialist">Specialist</option>
+                        <option value="Surgeon">Surgeon</option>
                     </select>
-            </div>
-            <div class="input_wrapper">
-                <input type="submit" class="input-submit" value="Sign Up">
-            </div>
-            <div class="switch-form">
-                Already have an account? <a href="login.php" id="show-login">Login</a>
-            </div>
-        </form>
-    </div>
+                </div>
+                <div class="input_wrapper">
+                    <input type="submit" class="input-submit" value="Sign Up">
+                </div>
+                <div class="switch-form">
+                    Already have an account? <a href="login.php" id="show-login">Login</a>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>
+
+<?php mysqli_close($connection); ?>
