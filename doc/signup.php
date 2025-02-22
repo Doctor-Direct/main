@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = mysqli_real_escape_string($connection, trim($_POST['username']));
     $password = mysqli_real_escape_string($connection, trim($_POST['password']));
     $confirm_password = mysqli_real_escape_string($connection, trim($_POST['confirm_password']));
-    $category_name = mysqli_real_escape_string($connection, trim($_POST['category_name']));
+    $category_name = mysqli_real_escape_string($connection, trim($_POST['category']));
 
     // Basic validations
     if (empty($fullname) || empty($contact) || empty($email) || empty($address) || empty($username) || empty($password) || empty($confirm_password) || empty($category)) {
@@ -29,16 +29,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($errors)) {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT); // Securely hash the password
 
-        $query = "INSERT INTO doctor (fullname, contact, email, address, username, password, category) VALUES ('$fullname', '$contact', '$email', '$address', '$username', '$hashed_password', '$category')";
+        $query = "INSERT INTO doctor (fullname, contact, email, address, username, password, category) VALUES ('$fullname', '$contact', '$email', '$address', '$username', '$hashed_password', '$category_name')";
 
         if (mysqli_query($connection, $query)) {
-            $_SESSION['username'] = $username;
-            header('Location: /doc_direct_main/doc/test.html');
+            echo "<script>alert('Registration Successful! Redirecting to login page.'); window.location.href='login.php';</script>";
             exit();
         } else {
             $errors[] = 'Database Insertion Failed: ' . mysqli_error($connection);
         }
     }
+}
+
+$category_query = "SELECT category_id, category_name FROM category";
+$category_result = mysqli_query($connection, $category_query);
+
+if (!$category_result) {
+    die('Query Failed: ' . mysqli_error($connection));
 }
 ?>
 
@@ -90,10 +96,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="input_wrapper">
                     <label for="category">Category</label>
                     <select name="category" required>
-                        <option value=""></option>
-                        <option value="General Practitioner">General Practitioner</option>
-                        <option value="Specialist">Specialist</option>
-                        <option value="Surgeon">Surgeon</option>
+                        <option value="">Select Category</option>
+                        <?php
+                        while ($row = mysqli_fetch_assoc($category_result)) {
+                            echo "<option value='" . $row['category_id'] . "'>" . $row['category_name'] . "</option>";
+                        }
+                        ?>
                     </select>
                 </div>
                 <div class="input_wrapper">
