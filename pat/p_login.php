@@ -1,3 +1,54 @@
+<?php
+require_once($_SERVER['DOCUMENT_ROOT'] . '/doc_direct_main/connection.php');
+session_start(); // Start session
+
+// Check for form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $errors = array();
+
+    // Validate username and password
+    if (empty(trim($_POST['username']))) {
+        $errors[] = 'Username is missing or invalid';
+    }
+    if (empty(trim($_POST['password']))) {
+        $errors[] = 'Password is missing or invalid';
+    }
+
+    // If no errors, process login
+    if (empty($errors)) {
+        $username = mysqli_real_escape_string($connection, $_POST['username']);
+        $password = $_POST['password']; // No need to escape since not directly used in query
+
+        // Query to check login credentials
+        $query = "SELECT * FROM doctor WHERE username = '{$username}' LIMIT 1";
+        $result_set = mysqli_query($connection, $query);
+
+        if ($result_set) {
+            if (mysqli_num_rows($result_set) == 1) {
+                $user = mysqli_fetch_assoc($result_set);
+
+                // Use password_verify to compare hashed passwords
+                if (password_verify($password, $user['password'])) {
+                    $_SESSION['username'] = $username; // Store username in session
+
+                    // Show success popup and redirect after clicking OK
+                    echo "<script>
+                        alert('Login Successful!');
+                        window.location.href = 'test.html';
+                    </script>";
+                    exit();
+                } else {
+                    $errors[] = 'Invalid Username / Password';
+                }
+            } else {
+                $errors[] = 'Invalid Username / Password';
+            }
+        } else {
+            $errors[] = 'Database Query Failed: ' . mysqli_error($connection);
+        }
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
