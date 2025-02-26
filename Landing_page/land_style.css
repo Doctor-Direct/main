@@ -1,0 +1,354 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    height: 200vh; /* Just to show scrolling effect */
+    padding-top: 80px; /* Space for fixed navbar */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: linear-gradient(90deg, #007bff, #00c3ff);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar.scrolled {
+    background: rgba(0, 123, 255, 0.8);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: white;
+    transition: color 0.3s ease-in-out, transform 0.3s;
+}
+
+.nav-links a:hover {
+    color: #ffeb3b;
+    transform: scale(1.1);
+}
+
+* {box-sizing:border-box}
+
+/* Slideshow container */
+.slideshow-container {
+    max-width: auto;
+    height: 400px;
+    position: relative;
+    margin: 10px;
+    overflow: hidden; /* Ensures images do not exceed the frame */
+  }
+  
+  /* Adjust image size */
+  .mySlides img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover; /* Ensures images fit within the frame without distortion */
+    border-radius: 12px;
+
+  }
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+.opp{
+    text-align: center;
+    padding: 50px 20px;
+    height: auto;
+    position: relative;
+
+}
+
+/* Container */
+.opportunities-container {
+  max-width: auto;
+  background: #cccacac0;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Headings */
+h2, h3 {
+  text-align: left;
+  color: #333;
+}
+
+/* Paragraph */
+p {
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* List Styling */
+.opportunities-list {
+  list-style: none;
+  padding: 0;
+}
+
+.opportunities-list li {
+  background: #ffffffaf;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.opportunities-list li strong {
+  margin-left: 10px;
+  color: #333;
+}
+
+/* Home Page Content */
+.home-content {
+    text-align: center;
+    padding: 50px 20px;
+    height: 400px;
+    width: auto;
+    display: flex;
+}
+
+.section {
+    margin: 10px;
+    max-width: 50%;
+    height: 400px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #007bff;
+}
+
+p {
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.part {
+    margin-top: 50px;
+    text-align: center;
+    padding: 50px 20px;
+    height: auto;
+}
+
+.section_part{
+    margin: 10px;
+    max-width: aut0;
+    height: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn {
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: white;
+  background: linear-gradient(90deg, #007bff, #00c3ff);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+}
+
+.appo{ 
+  align-items: center;}
+
+.container {
+  background-color: #357de9;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  width: auto;
+}
+
+
+.appointment-section {
+  margin-bottom: 25px;
+}
+
+.appointment-section button {
+  padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: rgb(255, 255, 255);
+    background: linear-gradient(90deg, #007bff, #00c3ff);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.horizontal-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: flex-end;
+  width: auto;
+}
+
+.form-group {
+  flex: 1;
+  min-width: auto;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.form-group input, .form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Add margin between Doctor Name and Specialization */
+#doctor-name {
+  margin-right: 20px; /* Adjust the value as needed */
+}
+
+/* Add margin between Date and Submit button */
+#date {
+  margin-right: 20px; /* Adjust the value as needed */
+}
+
+button[type="submit"] {
+  background-color: #15ee48;
+  color: #ffffff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  height: auto;
+  align-self: flex-end;
+  font-size: 16px;
+  font-weight: 500;
+}
